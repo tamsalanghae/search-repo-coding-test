@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Coding test',
       theme: ThemeData(
         fontFamily: "Quicksand",
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       home: const MyHomePage(title: 'Root view controller'),
     );
@@ -36,6 +36,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _fbKey = GlobalKey<FormBuilderState>();
   final SearchController _controller = SearchController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,18 +65,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Color(0xffBBBBBBF),
                     ),
                     width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.065,
+                    height: MediaQuery.of(context).size.height * 0.055,
                     child: FormBuilderTextField(
                       cursorColor: Colors.black,
                       name: 'search',
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'GitHubのリポジトリ',
                         suffixIcon: InkWell(
-                            child: Icon(
-                          Icons.clear,
-                          size: 18,
-                          color: Colors.black38,
-                        )),
+                              child: MaterialButton(
+                                onPressed: (){
+                                  if(_fbKey.currentState!.saveAndValidate()){
+                                    _fbKey.currentState!.reset();
+                                  }
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  size: 18,
+                                  color: Colors.black87,
+
+                                ),
+                              ),
+                            ),
+
                         border: InputBorder.none,
                       ),
                       onChanged: (dynamic val) async {
